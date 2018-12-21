@@ -4,6 +4,7 @@ certifi==2018.1.18
 cffi==1.11.5
 chardet==3.0.4
 cryptography==2.1.4
+celery[redis]
 decorator==4.1.2
 defusedxml==0.5.0
 Django==2.0.1
@@ -35,6 +36,7 @@ python-stdnum==1.7
 pytz==2018.3
 repoze.who==2.3
 requests==2.18.4
+redis==3.0.1
 six==1.11.0
 urllib3==1.22
 voluptuous==0.10.5

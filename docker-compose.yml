@@ -5,8 +5,14 @@ services:
       context: .
     env_file: docker_env
     command: python manage.py runserver 0.0.0.0:8000
+    depends_on:
+      - redis
     volumes:
       - .:/app
     ports:
       - "8000:8000"
       - "3000:3000"
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"

@@ -1,10 +1,16 @@
+import datetime
 from celery import task
+from dateutil.relativedelta import relativedelta
+
+from django.core.mail import send_mail
+from django.conf import settings
+
+from .models import Book, Library, BookCopy
 
 
 @task()
 def send_borrows_out_of_time_notifications():
-    with open('teste.txt', 'w') as fb:
-        fb.write('teste')
+    from celery.contrib import rbd;rdb.set_trace()
     borrow_book_out_of_time = get_borrows_out_of_time(settings.CRON_EMAIL_NOTIFICATION_SETTINGS["BORROW_MAX_TERM_MONTH"])
     send_notification(borrow_book_out_of_time)
 

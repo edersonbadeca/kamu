@@ -131,3 +131,6 @@ docker_env
 
 # vim
 tags
+
+# Celery Beat
+celerybeat-schedule.db

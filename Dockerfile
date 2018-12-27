@@ -16,6 +16,7 @@ ENV PATH=$NODEJS_HOME:$PATH
 RUN curl -L https://www.npmjs.com/install.sh | sh
 RUN npm install
 RUN pip3 install -r requirements.txt
+RUN pip3 install -r requirements-local.txt
 
 EXPOSE 8000
 EXPOSE 3000

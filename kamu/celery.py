@@ -14,8 +14,7 @@ app.autodiscover_tasks()
 
 @app.on_after_configure.connect
 def setup_periodic_tasks(sender, **kwargs):
-    # Calls test('hello') every 10 seconds.
-    sender.add_periodic_task(60, tasks.send_borrows_out_of_time_notifications, name='add every 10')
+    sender.add_periodic_task(settings.CELERY_TASK_FREQUENCY, tasks.send_borrows_out_of_time_notifications, name='Notification task')
 
 
 @app.task(bind=True)
@@ -24,9 +23,9 @@ def debug_task(self):
 
 
 app.conf.beat_schedule = {
-    'add-every-30-seconds': {
+    'Scheduling Notification task': {
         'task': 'books.tasks.send_borrows_out_of_time_notifications',
-        'schedule': 60
+        'schedule': settings.CELERY_TASK_FREQUENCY
     },
 }
 app.conf.timezone = 'UTC'

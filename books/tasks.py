@@ -14,7 +14,6 @@ def send_borrows_out_of_time_notifications():
     send_notification(borrow_book_out_of_time)
 
 
-@task()
 def send_notification(book_list):
     for book_copy in book_list:
         send_mail(
@@ -26,7 +25,6 @@ def send_notification(book_list):
             fail_silently=False,)
 
 
-@task()
 def get_borrows_out_of_time(number_months_borrowed_limit):
     limitDate = datetime.datetime.today() - relativedelta(months=number_months_borrowed_limit)
     return list(BookCopy.objects.filter(borrow_date__lte=limitDate))

@@ -21,10 +21,18 @@ export default class Header extends Component {
 		});
 	}
 
+	_admin() {
+		window.location.href = '/admin/';
+	}
+
 	_changeRegion() {
 		this.props.service.clearRegion();
 		window.location.href = '/';
 	}
+
+	_addBook() {
+		window.location.href = '/admin/books/book/isbn/';
+	}	
 
 	render() {
 		let menu;
@@ -35,7 +43,9 @@ export default class Header extends Component {
 					targetOrigin={{horizontal: 'right', vertical: 'top'}}
 					anchorOrigin={{horizontal: 'right', vertical: 'top'}}
 				>
+					<MenuItem primaryText="Admin" id="admin" onClick={this._admin} />
 					<MenuItem primaryText="Change library" id="change-region" onClick={this._changeRegion} />
+					<MenuItem primaryText="Add Book" id="add-book" onClick={this._addBook} />
 				</IconMenu>
             );
         }

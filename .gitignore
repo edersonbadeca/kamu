@@ -45,6 +45,7 @@ nosetests.xml
 coverage.xml
 *,cover
 .hypothesis/
+.nyc_output/
 
 # Translations
 *.mo
@@ -122,6 +123,8 @@ export-vars.sh
 kamu/bin
 kamu/pip-selfcheck.json
 kamu/pyvenv.cfg
+pyvenv.cfg
+bin
 
 # PyCharm
 .idea/

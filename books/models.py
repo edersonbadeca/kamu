@@ -69,6 +69,11 @@ class WishList(models.Model):
         return self.book.title
 
 
+class BookUpVote(models.Model):
+    wishlist = models.ForeignKey(WishList, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
+
+
 @receiver(post_save, sender=BookCopy)
 def update_wishlist_book(sender, **kwargs):
     book_in_wishlist = WishList.objects.filter(book=kwargs['instance'].book,

@@ -1,5 +1,5 @@
-from django import forms
 from django.contrib import admin, messages
+from django.contrib.auth import get_user
 from django.urls import path
 
 from books import views
@@ -26,6 +26,7 @@ class WishListInline(admin.TabularInline):
     max_num = 0
     can_delete = False
     readonly_fields = ['book', 'user', 'library', 'state']
+
 
 
 class BookAdmin(admin.ModelAdmin):
@@ -57,10 +58,30 @@ class BookCopyAdmin(admin.ModelAdmin):
 
 
 class WishListAdmin(admin.ModelAdmin):
+
+    def upvote_book(self, request, queryset):
+        user = get_user(request)
+        error = []
+        success = []
+        sep = ","
+        for wishlist in queryset:
+            success.append(wishlist.book.title)
+            if BookUpVote.objects.filter(wishlist=wishlist, user=user):
+                error.append(wishlist.book.title)
+            else:
+                upvote_model = BookUpVote()
+                upvote_model.wishlist = wishlist
+                upvote_model.user = user
+                upvote_model.save()
+
+        self.message_user(request, f"The books {sep.join(success)} was successfully upvoted.")
+
+    upvote_book.short_description = "UpVote this book."
     list_display = ['book', 'user', 'library', 'state']
     autocomplete_fields = ['book', 'library', 'user']
     search_fields = ['book__title', 'user__username', 'state']
     list_per_page = 20
+    actions = [upvote_book]
 
 
 admin.site.site_header = 'Kamu administration'

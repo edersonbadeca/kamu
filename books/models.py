@@ -68,6 +68,9 @@ class WishList(models.Model):
     def __str__(self):
         return self.book.title
 
+    def votes(self):
+        return BookUpVote.objects.filter(wishlist=self).count()
+
 
 class BookUpVote(models.Model):
     wishlist = models.ForeignKey(WishList, on_delete=models.CASCADE)

@@ -77,7 +77,7 @@ class WishListAdmin(admin.ModelAdmin):
         self.message_user(request, f"The books {sep.join(success)} was successfully upvoted.")
 
     upvote_book.short_description = "UpVote this book."
-    list_display = ['book', 'user', 'library', 'state']
+    list_display = ['book', 'user', 'library', 'state', 'votes']
     autocomplete_fields = ['book', 'library', 'user']
     search_fields = ['book__title', 'user__username', 'state']
     list_per_page = 20
